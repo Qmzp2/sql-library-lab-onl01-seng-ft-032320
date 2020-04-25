@@ -31,8 +31,10 @@ end
 def select_series_title_with_most_human_characters
   "SELECT series.title
   FROM series
-  INNER JOIN series
-  ON characters.series_id = series.id
+  INNER JOIN authors
+  ON authors.id = author_id
+  INNER JOIN characters
+  ON characters.author_id = author.id
   GROUP BY series.title, species
   HAVING characters.species = 'human'
   ORDER BY COUNT(species) DESC
